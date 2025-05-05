@@ -1,0 +1,38 @@
+_id: 68186b042e6854005053e593
+name: Resource
+language: javascript
+timeout: 6
+triggers:
+  default:
+    type: http
+    active: false
+    options:
+      method: Get
+      path: /
+      preflight: true
+  invite:
+    options:
+      method: Post
+      path: /resource/:id/invitation
+      preflight: true
+    type: http
+    active: true
+  revoke:
+    options:
+      method: Delete
+      path: /resource/:id/invitation/:invitationId
+      preflight: true
+    type: http
+    active: true
+  deleteMember:
+    options:
+      method: Delete
+      path: /resource/:id/member/:memberId
+      preflight: true
+    type: http
+    active: true
+env:
+  API_SECRET_KEY: "{API_SECRET_KEY}"
+memoryLimit: 100
+category: RBAC
+order: 5

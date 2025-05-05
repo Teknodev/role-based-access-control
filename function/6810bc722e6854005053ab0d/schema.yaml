@@ -1,0 +1,17 @@
+_id: 6810bc722e6854005053ab0d
+name: Access Manager
+language: javascript
+timeout: 6
+triggers:
+  default:
+    type: http
+    active: false
+    options:
+      method: Get
+      path: /
+      preflight: true
+env:
+  API_SECRET_KEY: "{API_SECRET_KEY}"
+memoryLimit: 100
+category: RBAC
+order: 2

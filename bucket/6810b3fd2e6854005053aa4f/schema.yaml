@@ -1,0 +1,116 @@
+_id: 6810b3fd2e6854005053aa4f
+title: Invitation
+description: Describe your new bucket
+icon: view_stream
+primary: token
+readOnly: false
+history: false
+properties:
+  token:
+    type: string
+    title: token
+    description: Description of the token input
+    options:
+      position: bottom
+  expires_at:
+    type: date
+    title: expires_at
+    description: Description of the expires_at input
+    options:
+      position: bottom
+  created_at:
+    type: date
+    title: created_at
+    description: Description of the created_at input
+    options:
+      position: bottom
+    default: :created_at
+  accepted_at:
+    type: date
+    title: accepted_at
+    description: Description of the accepted_at input
+    options:
+      position: bottom
+  status:
+    type: string
+    title: status
+    description: Description of the status input
+    options:
+      position: bottom
+    enum:
+      - pending
+      - accepted
+      - revoked
+      - expired
+    default: pending
+  organization:
+    type: relation
+    title: organization
+    description: Description of the organization input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 6810b3292e6854005053aa36
+    dependent: false
+    primary: name
+  identifier:
+    type: string
+    title: identifier
+    description: Description of the identifier input
+    options:
+      position: bottom
+  team:
+    type: relation
+    title: team
+    description: Description of the team input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 6810b3e32e6854005053aa45
+    dependent: false
+    primary: name
+  resource:
+    type: relation
+    title: resource
+    description: Description of the resource input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 6810b3f12e6854005053aa4a
+    dependent: false
+    primary: name
+  invited_by:
+    type: relation
+    title: invited_by
+    description: Description of the invited_by input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 63ac7c8e9b0b86002b374178
+    dependent: false
+    primary: name
+  user:
+    type: relation
+    title: user
+    description: Description of the user input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 63ac7c8e9b0b86002b374178
+    dependent: false
+    primary: name
+  role:
+    type: relation
+    title: role
+    description: Description of the role input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 6810b8812e6854005053aace
+    dependent: false
+    primary: name
+acl:
+  write: true==true
+  read: true==true
+order: 15
+category: RBAC

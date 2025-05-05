@@ -1,0 +1,52 @@
+_id: 68122cb52e6854005053c2e9
+name: Team
+language: javascript
+timeout: 6
+triggers:
+  create:
+    options:
+      method: Post
+      path: /team
+      preflight: true
+    type: http
+    active: true
+  _delete:
+    options:
+      method: Delete
+      path: /team/:id
+      preflight: true
+    type: http
+    active: true
+  rename:
+    options:
+      method: Patch
+      path: /team/:id/name
+      preflight: true
+    type: http
+    active: true
+  invite:
+    options:
+      method: Post
+      path: /team/:id/invitation
+      preflight: true
+    type: http
+    active: true
+  revoke:
+    options:
+      method: Delete
+      path: /team/:id/invitation/:invitationId
+      preflight: true
+    type: http
+    active: true
+  deleteMember:
+    options:
+      method: Delete
+      path: /team/:id/member/:memberId
+      preflight: true
+    type: http
+    active: true
+env:
+  API_SECRET_KEY: "{API_SECRET_KEY}"
+memoryLimit: 100
+category: RBAC
+order: 4

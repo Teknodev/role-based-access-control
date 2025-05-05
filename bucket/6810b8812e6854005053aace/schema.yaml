@@ -1,0 +1,66 @@
+_id: 6810b8812e6854005053aace
+title: Role
+description: Describe your new bucket
+icon: view_stream
+primary: name
+readOnly: false
+history: false
+properties:
+  name:
+    type: string
+    title: name
+    description: Description of the name input
+    options:
+      position: bottom
+  scope:
+    type: string
+    title: scope
+    description: Description of the scope input
+    options:
+      position: bottom
+    enum:
+      - organization
+      - team
+      - resource
+  team:
+    type: relation
+    title: team
+    description: Description of the team input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 6810b3e32e6854005053aa45
+    dependent: false
+    primary: name
+  resource:
+    type: relation
+    title: resource
+    description: Description of the resource input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 6810b3f12e6854005053aa4a
+    dependent: false
+    primary: name
+  organization:
+    type: relation
+    title: organization
+    description: Description of the organization input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 6810b3292e6854005053aa36
+    dependent: false
+    primary: name
+  created_at:
+    type: date
+    title: created_at
+    description: Description of the created_at input
+    options:
+      position: bottom
+    default: :created_at
+acl:
+  write: true==true
+  read: true==true
+order: 11
+category: RBAC

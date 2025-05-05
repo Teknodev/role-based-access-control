@@ -1,0 +1,64 @@
+name: Role Based Access Control
+description: Role Based Access Control full asset
+configs:
+  - title: RBAC Secret API Key
+    module: apikey
+    submodule: schema
+    resource_id: 6810caf92e6854005053ad14
+    property: key
+    type: string
+  - title: User Bucket ID (Organization owner)
+    module: bucket
+    submodule: schema
+    resource_id: 6810b3292e6854005053aa36
+    property: properties.owner.bucketId
+    type: string
+  - title: User Bucket ID (Organization members)
+    module: bucket
+    submodule: schema
+    resource_id: 6810b3292e6854005053aa36
+    property: properties.members.bucketId
+    type: string
+  - title: User Bucket ID (Team members)
+    module: bucket
+    submodule: schema
+    resource_id: 6810b3e32e6854005053aa45
+    property: properties.members.bucketId
+    type: string
+  - title: User Bucket ID (Resource owner)
+    module: bucket
+    submodule: schema
+    resource_id: 6810b3f12e6854005053aa4a
+    property: properties.owner.bucketId
+    type: string
+  - title: User Bucket ID (Resource members)
+    module: bucket
+    submodule: schema
+    resource_id: 6810b3f12e6854005053aa4a
+    property: properties.members.bucketId
+    type: string
+  - title: Resource Bucket ID (Resource item)
+    module: bucket
+    submodule: schema
+    resource_id: 6810b3f12e6854005053aa4a
+    property: properties.item.bucketId
+    type: string
+  - title: User Bucket ID (Invitation invited_by)
+    module: bucket
+    submodule: schema
+    resource_id: 6810b3fd2e6854005053aa4f
+    property: properties.invited_by.bucketId
+    type: string
+  - title: User Bucket ID (Invitation user)
+    module: bucket
+    submodule: schema
+    resource_id: 6810b3fd2e6854005053aa4f
+    property: properties.user.bucketId
+    type: string
+  - title: User Bucket ID (Audit Log user)
+    module: bucket
+    submodule: schema
+    resource_id: 6810b4382e6854005053aa59
+    property: properties.user.bucketId
+    type: string
+url: https://github.com/Teknodev/role-based-access-control.git

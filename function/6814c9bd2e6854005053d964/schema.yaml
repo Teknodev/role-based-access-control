@@ -1,0 +1,17 @@
+_id: 6814c9bd2e6854005053d964
+name: Initialization
+language: javascript
+timeout: 6
+triggers:
+  initializeDefaultData:
+    type: http
+    active: true
+    options:
+      method: Post
+      path: /rbac/initialize
+      preflight: true
+env:
+  API_SECRET_KEY: "{API_SECRET_KEY}"
+memoryLimit: 100
+category: RBAC
+order: 7

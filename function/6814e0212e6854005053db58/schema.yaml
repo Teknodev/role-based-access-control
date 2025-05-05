@@ -1,0 +1,16 @@
+_id: 6814e0212e6854005053db58
+name: Api
+language: javascript
+timeout: 6
+triggers:
+  default:
+    type: http
+    active: false
+    options:
+      method: Get
+      path: /
+      preflight: true
+env: {}
+memoryLimit: 100
+category: RBAC
+order: 8

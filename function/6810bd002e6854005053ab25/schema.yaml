@@ -1,0 +1,52 @@
+_id: 6810bd002e6854005053ab25
+name: Organization
+language: javascript
+timeout: 6
+triggers:
+  create:
+    type: http
+    active: true
+    options:
+      method: Post
+      path: /organization
+      preflight: true
+  _delete:
+    options:
+      method: Delete
+      path: /organization/:id
+      preflight: true
+    type: http
+    active: true
+  rename:
+    options:
+      method: Patch
+      path: /organization/:id/name
+      preflight: true
+    type: http
+    active: true
+  invite:
+    options:
+      path: /organization/:id/invitation
+      method: Post
+      preflight: true
+    type: http
+    active: true
+  revoke:
+    options:
+      method: Delete
+      path: /organization/:id/invitation/:invitationId
+      preflight: true
+    type: http
+    active: true
+  deleteMember:
+    options:
+      method: Delete
+      path: /organization/:id/member/:memberId
+      preflight: true
+    type: http
+    active: true
+env:
+  API_SECRET_KEY: "{API_SECRET_KEY}"
+memoryLimit: 100
+category: RBAC
+order: 3

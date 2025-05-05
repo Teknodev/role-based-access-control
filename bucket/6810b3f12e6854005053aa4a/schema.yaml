@@ -1,0 +1,76 @@
+_id: 6810b3f12e6854005053aa4a
+title: Resource
+description: Describe your new bucket
+icon: view_stream
+primary: name
+readOnly: false
+history: false
+properties:
+  name:
+    type: string
+    title: name
+    description: Description of the name input
+    options:
+      position: bottom
+  organization:
+    type: relation
+    title: organization
+    description: Description of the organization input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 6810b3292e6854005053aa36
+    dependent: false
+    primary: name
+  teams:
+    type: relation
+    title: teams
+    description: Description of the teams input
+    options:
+      position: bottom
+    relationType: onetomany
+    bucketId: 6810b3e32e6854005053aa45
+    dependent: false
+    primary: name
+  owner:
+    type: relation
+    title: owner
+    description: Description of the owner input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 63ac7c8e9b0b86002b374178
+    dependent: false
+    primary: name
+  item:
+    type: relation
+    title: item
+    description: Description of the item input
+    options:
+      position: bottom
+    relationType: onetoone
+    bucketId: 63b2c3529b0b86002b37507e
+    dependent: false
+    primary: name
+  members:
+    type: relation
+    title: members
+    description: Description of the members input
+    options:
+      position: bottom
+    relationType: onetomany
+    bucketId: 63ac7c8e9b0b86002b374178
+    dependent: false
+    primary: name
+  created_at:
+    type: date
+    title: created_at
+    description: Description of the created_at input
+    options:
+      position: bottom
+    default: :created_at
+acl:
+  write: true==true
+  read: true==true
+order: 14
+category: RBAC

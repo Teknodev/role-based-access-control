@@ -1,0 +1,7 @@
+_id: 6810caf92e6854005053ad14
+name: RBAC secret key
+active: true
+description: RBAC asset secret key
+key: eewk428ma2i8mno
+policies:
+  - BucketFullAccess
