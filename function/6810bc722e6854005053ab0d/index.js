@@ -1,4 +1,7 @@
 import * as Api from "../../6814e0212e6854005053db58/.build/index.mjs";
+import * as Organization from "../../6810bd002e6854005053ab25/.build/index.mjs";
+import * as Team from "../../68122cb52e6854005053c2e9/.build/index.mjs";
+import * as Resource from "../../68186b042e6854005053e593/.build/index.mjs";
 
 const ACCESS_STATUS = {
 	GRANTED: "granted",
@@ -18,7 +21,7 @@ export function check(action, handler) {
 				return res.status(403).send({ message: "Forbidden" })
 			};
 
-			insertLog(action, ACCESS_STATUS.FORBIDDEN, user);
+			insertLog(action, ACCESS_STATUS.GRANTED, user, scopeItemId);
 			return handler(req, res);
 		} catch (err) {
 			console.error("Access check failed:", err);
@@ -28,14 +31,16 @@ export function check(action, handler) {
 }
 
 async function isHasAccess(action, decodedToken, scopeItemId) {
-	const roleAssigment = decodedToken?.attributes?.role_assigment;
-	if (!roleAssigment) return false;
+	const roleAssignment = decodedToken?.attributes?.role_assignment;
+	if (!roleAssignment) return false;
 
-	const { role_actions: roleActions } = await getRoleAssigment(roleAssigment);
+	const { role_actions: roleActions } = await getRoleAssignment(roleAssignment);
 	if (!roleActions?.length) return false;
 
-	const resource = await getResourceByItemId(scopeItemId);
-	if (resource) scopeItemId = resource?._id
+	if (scopeItemId) {
+		const resource = await getResourceByItemId(scopeItemId);
+		if (resource) scopeItemId = resource?._id
+	}
 
 	// 1. Check direct scope-level match
 	const scopeMatched = roleActions
@@ -58,13 +63,18 @@ async function isHasAccess(action, decodedToken, scopeItemId) {
 	return false;
 }
 
-function getRoleAssigment(id) {
+function getRoleAssignment(id) {
 	const Bucket = Api.useBucket();
-	return Bucket.data.get(Api.BUCKET.ROLE_ASSIGMENT, id, {
+	return Bucket.data.get(Api.BUCKET.ROLE_ASSIGNMENT, id, {
 		queryParams: {
 			relation: ["role_actions"]
 		}
 	});
+}
+
+export function createRoleAssignment(title = "") {
+	const Bucket = Api.useBucket();
+	return Bucket.data.insert(Api.BUCKET.ROLE_ASSIGNMENT, { title });
 }
 
 function getResourceByItemId(id) {
@@ -74,9 +84,30 @@ function getResourceByItemId(id) {
 	}).then(r => r[0])
 }
 
-function insertLog(action, status, user) {
-	const Bucket = Api.useBucket();
-	return Bucket.data.insert(Api.BUCKET.AUDIT_LOG,
-		{ action, user, status, created_at: new Date() }
-	).catch((err) => console.error(err))
+async function insertLog(action, status, user, scopeItemId) {
+	try {
+		const Bucket = Api.useBucket();
+		const scope = await getScopeKey(scopeItemId);
+		const logData = { action, user, status, created_at: new Date() }
+		if (scope) logData[scope] = scopeItemId;
+
+		return Bucket.data.insert(Api.BUCKET.AUDIT_LOG, logData)
+	} catch (err) {
+		console.error("Insert Log:", err);
+	}
+}
+
+async function getScopeKey(id) {
+	if (!id) return;
+
+	const checks = [
+		{ fn: Organization.getOrganization, type: "organization" },
+		{ fn: Team.getTeam, type: "team" },
+		{ fn: Resource.getResource, type: "resource" },
+	];
+
+	for (const { fn, type } of checks) {
+		const result = await fn(id);
+		if (result) return type;
+	}
 }

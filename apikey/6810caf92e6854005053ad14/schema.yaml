@@ -5,3 +5,4 @@ description: RBAC asset secret key
 key: eewk428ma2i8mno
 policies:
   - BucketFullAccess
+  - IdentityFullAccess

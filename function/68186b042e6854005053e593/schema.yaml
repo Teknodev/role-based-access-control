@@ -1,15 +1,8 @@
 _id: 68186b042e6854005053e593
 name: Resource
 language: javascript
-timeout: 6
+timeout: 30
 triggers:
-  default:
-    type: http
-    active: false
-    options:
-      method: Get
-      path: /
-      preflight: true
   invite:
     options:
       method: Post

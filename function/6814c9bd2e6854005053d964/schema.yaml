@@ -1,7 +1,7 @@
 _id: 6814c9bd2e6854005053d964
 name: Initialization
 language: javascript
-timeout: 6
+timeout: 30
 triggers:
   initializeDefaultData:
     type: http
